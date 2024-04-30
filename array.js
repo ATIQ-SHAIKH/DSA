@@ -6,5 +6,5 @@ module.exports = (array) => {
     if (i === 0) lowest = array[i];
     else if (array[i] < lowest) lowest = array[i];
   }
-  console.log(`lowest element in the array is: ${lowest}`);
+  console.log(`\nlowest element in the array is: ${lowest}`);
 };

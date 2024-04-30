@@ -1,41 +1,72 @@
+const findLowestElement = require("./array");
+
 const readline = require("node:readline");
 const readlineInterfaceOptions = {
   input: process.stdin,
   output: process.stdout,
 };
 
-const question1 = `Enter the numbers you would like to sort(seperated by space(s)):`;
-const question2 = `Choose what to do with these numbers:
+const question1 = `\nEnter the numbers you would like to sort(seperated by space(s)):`;
+const question2 = `\nChoose what to do with these numbers:
 1. Find the lowest element.
 2. Apply Bubble Sort.
-2. Apply Selection Sort
-2. Apply Insertion Sort.`;
+3. Apply Selection Sort
+4. Apply Insertion Sort.`;
+const question2Options = ["1"];
 
 let array = [];
 
 const rl = readline.createInterface(readlineInterfaceOptions);
 
-const askInput = (string) => {
-  if (string.trim().length) {
-    for (str of string.split(" ")) {
-      try {
-        if (!str.length) continue;
-        const number = parseInt(str);
-        if (number) array.push(parseInt(str));
-        else continue;
-      } catch (e) {
-        console.log(e);
-        process.exit(0);
-      }
-    }
-  }
-  if (!array.length) {
-    console.log("I only accept numbers, idiot XD");
-    rl.close();
-  } else {
-    console.log("Your Input:", array);
-    rl.question(question2, () => console.log(input));
+const sanitizeValidNo = (funcNo) => {
+  return funcNo.trim()[0];
+};
+
+const chooseAndRunFunction = (funcNo) => {
+  switch (sanitizeValidNo(funcNo)) {
+    case "1":
+      findLowestElement(array);
+      rl.close();
+      break;
+    default:
+      console.log("\nInvalid Option. :(");
+      rl.prompt();
   }
 };
 
-rl.question(question1, askInput);
+const sanitizeListOfNumbersByUser = () => {
+  for (str of string.split(" ")) {
+    if (!str.length) continue;
+    const number = parseInt(str);
+    if (number) array.push(parseInt(str));
+    else continue;
+  }
+};
+
+const askArray = (string) => {
+  try {
+    if (!string.trim().length) {
+      console.log("\nEnter numbers... idiot XD");
+      rl.close();
+    }
+    sanitizeListOfNumbersByUser();
+    if (!array.length) {
+      console.log("\nI only accept numbers, idiot XD");
+      rl.close();
+    } else {
+      console.log("\nYour Input:", array);
+      rl.setPrompt(question2);
+      rl.prompt();
+      rl.on("line", chooseAndRunFunction);
+      rl.on("close", () => {
+        console.log("\nbye!");
+        process.exit(0);
+      });
+    }
+  } catch (e) {
+    console.log(e);
+    process.exit(0);
+  }
+};
+
+rl.question(question1, askArray);

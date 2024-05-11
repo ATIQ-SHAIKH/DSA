@@ -1,5 +1,6 @@
 const findLowestElement = require("./array");
 const bubbleSort = require("./bubbleSort");
+const selectionSort = require("./selectionSort");
 
 const readline = require("node:readline");
 const readlineInterfaceOptions = {
@@ -14,7 +15,7 @@ const question2 = `\nChoose what to do with these numbers:
 3. Apply Selection Sort
 4. Apply Insertion Sort.
 \n`;
-const question2Options = ["1", "2"];
+const question2Options = ["1", "2", "3"];
 
 let array = [];
 
@@ -32,6 +33,10 @@ const chooseAndRunFunction = (funcNo) => {
       break;
     case question2Options[1]:
       bubbleSort(array);
+      rl.close();
+      break;
+    case question2Options[2]:
+      selectionSort(array);
       rl.close();
       break;
     default:

@@ -1,4 +1,5 @@
 const findLowestElement = require("./array");
+const bubbleSort = require("./bubbleSort");
 
 const readline = require("node:readline");
 const readlineInterfaceOptions = {
@@ -11,8 +12,9 @@ const question2 = `\nChoose what to do with these numbers:
 1. Find the lowest element.
 2. Apply Bubble Sort.
 3. Apply Selection Sort
-4. Apply Insertion Sort.`;
-const question2Options = ["1"];
+4. Apply Insertion Sort.
+\n`;
+const question2Options = ["1", "2"];
 
 let array = [];
 
@@ -24,8 +26,12 @@ const sanitizeValidNo = (funcNo) => {
 
 const chooseAndRunFunction = (funcNo) => {
   switch (sanitizeValidNo(funcNo)) {
-    case "1":
+    case question2Options[0]:
       findLowestElement(array);
+      rl.close();
+      break;
+    case question2Options[1]:
+      bubbleSort(array);
       rl.close();
       break;
     default:
@@ -34,7 +40,7 @@ const chooseAndRunFunction = (funcNo) => {
   }
 };
 
-const sanitizeListOfNumbersByUser = () => {
+const sanitizeListOfNumbersByUser = (string) => {
   for (str of string.split(" ")) {
     if (!str.length) continue;
     const number = parseInt(str);
@@ -49,7 +55,7 @@ const askArray = (string) => {
       console.log("\nEnter numbers... idiot XD");
       rl.close();
     }
-    sanitizeListOfNumbersByUser();
+    sanitizeListOfNumbersByUser(string);
     if (!array.length) {
       console.log("\nI only accept numbers, idiot XD");
       rl.close();

@@ -13,12 +13,10 @@ module.exports = (array) => {
   for (let i = 1; i < array.length; i++) {
     let swapWithIndex = i;
     const currentValue = array.splice(i, 1)[0]; // array.splice(index, count, item1, ....., itemX), creates a new array also modifies existing
-    console.log(currentValue);
     for (let j = i - 1; j >= 0; j--) {
       if (currentValue < array[j]) swapWithIndex = j;
     }
     array.splice(swapWithIndex, 0, currentValue);
-    console.log(array);
   }
   console.log("\nArray sorted using Insertion Sort: ", array);
 };

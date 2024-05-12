@@ -28,5 +28,5 @@ module.exports = (array) => {
 
   const result = quickSort(array);
 
-  console.log("\nArray sorted using Insertion Sort: ", result);
+  console.log("\nArray sorted using Quick Sort: ", result);
 };

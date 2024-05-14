@@ -1,5 +1,6 @@
 const findLowestElement = require("./array");
 const bubbleSort = require("./bubbleSort");
+const countingSort = require("./countingSort");
 const insertionSort = require("./insertionSort");
 const quickSort = require("./quickSort");
 const selectionSort = require("./selectionSort");
@@ -18,7 +19,7 @@ const question2 = `\nChoose what to do with these numbers:
 4. Apply Insertion Sort.
 5. Apply Quick Sort.
 \n`;
-const question2Options = ["1", "2", "3", "4", "5"];
+const question2Options = ["1", "2", "3", "4", "5", "6"];
 
 let array = [];
 
@@ -53,6 +54,11 @@ const chooseAndRunFunction = (funcNo) => {
       rl.close();
       console.log("\nbye!");
       break;
+    case question2Options[5]:
+      countingSort(array);
+      rl.close();
+      console.log("\nbye!");
+      break;
     default:
       console.log("\nInvalid Option. :(");
       rl.prompt();
@@ -63,7 +69,7 @@ const sanitizeListOfNumbersByUser = (string) => {
   for (str of string.split(" ")) {
     if (!str.length) continue;
     const number = parseInt(str);
-    if (number) array.push(parseInt(str));
+    if (typeof number === "number") array.push(parseInt(str));
     else continue;
   }
 };

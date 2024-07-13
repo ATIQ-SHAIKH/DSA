@@ -3,6 +3,7 @@ const bubbleSort = require("./bubbleSort");
 const countingSort = require("./countingSort");
 const insertionSort = require("./insertionSort");
 const quickSort = require("./quickSort");
+const radixSort = require("./radixSort");
 const selectionSort = require("./selectionSort");
 
 const readline = require("node:readline");
@@ -18,8 +19,10 @@ const question2 = `\nChoose what to do with these numbers:
 3. Apply Selection Sort
 4. Apply Insertion Sort.
 5. Apply Quick Sort.
+6. Apply Counting Sort.
+7. Apply Radix Sort.
 \n`;
-const question2Options = ["1", "2", "3", "4", "5", "6"];
+const question2Options = ["1", "2", "3", "4", "5", "6", "7"];
 
 let array = [];
 
@@ -28,6 +31,7 @@ const rl = readline.createInterface(readlineInterfaceOptions);
 const sanitizeValidNo = (funcNo) => funcNo.trim()[0];
 
 const chooseAndRunFunction = (funcNo) => {
+  console.log(funcNo, "funcNo");
   switch (sanitizeValidNo(funcNo)) {
     case question2Options[0]:
       findLowestElement(array);
@@ -56,6 +60,11 @@ const chooseAndRunFunction = (funcNo) => {
       break;
     case question2Options[5]:
       countingSort(array);
+      rl.close();
+      console.log("\nbye!");
+      break;
+    case question2Options[6]:
+      radixSort(array);
       rl.close();
       console.log("\nbye!");
       break;

@@ -18,6 +18,13 @@ const findMax = (array) => {
   return max;
 };
 
+/**
+ * [1, 3, 0, 5]
+ * [0, 0, 0, 0, 0,]
+ * [1, 1, 0, 1, 0, 1]
+ * [0, 1, 3, 5]
+ */
+
 module.exports = (array) => {
   const sortedArray = [];
   // create a new array with 0 as all elements and length of the element will be same as max element in the array
